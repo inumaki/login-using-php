@@ -5,12 +5,18 @@
                   
     private static $obj;
     public static $pdo;
-                  
-     private final function __construct($servername,$dbname,$dbusername,$dbpassword) 
+    
+private $servername = "localhost";
+private $dbusername = "aryan";
+private $dbpassword = "aryan";
+private $dbname = "mysql";
+
+
+     private final function __construct() 
      {
 
 
-        self::$pdo = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
+        self::$pdo = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->dbusername, $this->dbpassword);
 
         self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         echo "connection established";
@@ -18,12 +24,12 @@
 
      }
       
-     public static function getConnect($servername,$dbname,$dbusername,$dbpassword) {
+     public static function getConnect() {
 
          if (!isset(self::$obj)) 
          {
 
-            self::$obj = new DataBaseConnector($servername,$dbname,$dbusername,$dbpassword);
+            self::$obj = new DataBaseConnector();
          
         }
           

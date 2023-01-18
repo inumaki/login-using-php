@@ -1,14 +1,11 @@
 <?php
 include 'connection.php';
 include 'user.php';
-$servername = "localhost";
-$dbusername = "aryan";
-$dbpassword = "aryan";
-$dbname = "mysql";
+
 if (isset($_POST['submit'])) {
     try {
 
-        $obj1 = DataBaseConnector::getConnect($servername,$dbname,$dbusername,$dbusername);
+        $obj1 = DataBaseConnector::getConnect();
        
 
 
@@ -19,7 +16,7 @@ if (isset($_POST['submit'])) {
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
 
-            UserQueries::getConnect(DataBaseConnector::$pdo);
+        UserQueries::getConnect(DataBaseConnector::$pdo);
          UserQueries::insertData($email, $name, $address, $contact, $password);
     
         

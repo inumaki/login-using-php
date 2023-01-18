@@ -4,17 +4,14 @@ include 'connection.php';
 
 include 'user.php';
 
-$servername = "localhost";
-$dbusername = "aryan";
-$dbpassword = "aryan";
-$dbname = "mysql";
+
 
 
 if (isset($_POST['submit'])) {
     try {
 
 
-    $obj1 = DataBaseConnector::getConnect($servername,$dbname,$dbusername,$dbusername);
+    $obj1 = DataBaseConnector::getConnect();
 
         $email = $_POST['email'];
         $password =$_POST['password'];
