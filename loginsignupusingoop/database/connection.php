@@ -4,7 +4,7 @@
  class DataBaseConnector {
                   
     private static $obj;
-    private static $pdo;
+    public static $pdo;
                   
      private final function __construct($servername,$dbname,$dbusername,$dbpassword) 
      {

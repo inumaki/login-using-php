@@ -1,29 +1,22 @@
 <?php
 
-include 'connection.php';
-
-include 'user.php';
-
 $servername = "localhost";
 $dbusername = "aryan";
 $dbpassword = "aryan";
 $dbname = "mysql";
-
-
 if (isset($_POST['submit'])) {
     try {
+        $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
 
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $obj1 = DataBaseConnector::getConnect($servername,$dbname,$dbusername,$dbusername);
 
         $email = $_POST['email'];
         $password =$_POST['password'];
         $sql = "SELECT  customer_name,email, password from customer_info where '$email'=email ";
         
-        UserQueries::getConnect(DataBaseConnector::$pdo);
-        $q = UserQueries::fetch($sql);
-
-      
+$q = $pdo->query($sql);
+$q->setFetchMode(PDO::FETCH_ASSOC);
 while ($row = $q->fetch())
 {
         $res=  password_verify($password, $row['password']);
@@ -50,7 +43,7 @@ while ($row = $q->fetch())
     }
 
 
-    DataBaseConnector::destroy_connection();
+    $conn = null;
 }
     
 ?>

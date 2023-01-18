@@ -1,15 +1,14 @@
 <?php
-include 'connection.php';
-include 'user.php';
+
 $servername = "localhost";
 $dbusername = "aryan";
 $dbpassword = "aryan";
 $dbname = "mysql";
 if (isset($_POST['submit'])) {
     try {
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $dbusername, $dbpassword);
 
-        $obj1 = DataBaseConnector::getConnect($servername,$dbname,$dbusername,$dbusername);
-       
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
         $email = $_POST['email'];
@@ -19,21 +18,21 @@ if (isset($_POST['submit'])) {
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
 
-            UserQueries::getConnect(DataBaseConnector::$pdo);
-         UserQueries::insertData($email, $name, $address, $contact, $password);
-    
+        $sql = "INSERT INTO customer_info (customer_name, email,contact,address,password)
+  VALUES ('$name', '$email', '$contact','$address', '$password')";
+
+        $conn->exec($sql);
         
         echo "Successfully Signedup";
         echo "<br>";
         echo '<a href="../login.php">' . "login now" . '</a>';
 
-    } 
-    catch (PDOException $e) {
+    } catch (PDOException $e) {
         echo $sql . "<br>" . $e->getMessage();
     }
 
 
-    DataBaseConnector::destroy_connection();
+    $conn = null;
 }
     
 ?>
