@@ -4,7 +4,7 @@
  class DataBaseConnector {
                   
     private static $obj;
-    public static $pdo;
+    private static $pdo;
     
 private $servername = "localhost";
 private $dbusername = "aryan";
@@ -33,7 +33,7 @@ private $dbname = "mysql";
          
         }
           
-         return self::$obj;
+         return self::$pdo;
      }
 
 

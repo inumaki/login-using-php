@@ -5,7 +5,7 @@ include 'user.php';
 if (isset($_POST['submit'])) {
     try {
 
-        $obj1 = DataBaseConnector::getConnect();
+        $pdo = DataBaseConnector::getConnect();
        
 
 
@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
 
-        UserQueries::getConnect(DataBaseConnector::$pdo);
+         UserQueries::getConnect($pdo);
          UserQueries::insertData($email, $name, $address, $contact, $password);
     
         

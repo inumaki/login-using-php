@@ -11,13 +11,13 @@ if (isset($_POST['submit'])) {
     try {
 
 
-    $obj1 = DataBaseConnector::getConnect();
+    $pdo = DataBaseConnector::getConnect();
 
         $email = $_POST['email'];
         $password =$_POST['password'];
         $sql = "SELECT  customer_name,email, password from customer_info where '$email'=email ";
         
-        UserQueries::getConnect(DataBaseConnector::$pdo);
+        UserQueries::getConnect($pdo);
         $q = UserQueries::fetch($sql);
 
       
